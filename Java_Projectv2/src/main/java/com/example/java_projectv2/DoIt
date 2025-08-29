@@ -1,0 +1,20 @@
+TODO
+
+Config Folder
+DbConfig,JwtConfig,EmailConfig,LoggingConfig
+
+
+Dto Folder----Success
+Add Another Class
+Add Dto which one pay the SR rule
+
+MiddleWare Folder
+Validation add ----Success
+ExceptionHandling add ----Success
+Api Key Add
+Logging Add
+
+Pagination Add
+Search Function Add for model another Field
+
+Security
