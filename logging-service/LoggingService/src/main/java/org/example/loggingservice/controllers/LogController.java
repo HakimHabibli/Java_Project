@@ -2,11 +2,8 @@ package org.example.loggingservice.controllers;
 
 import org.example.loggingservice.entites.Log;
 import org.example.loggingservice.enums.LogLevel;
-import org.example.loggingservice.repositories.LogRepository;
 import org.example.loggingservice.services.LogService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +19,11 @@ public class LogController
     @GetMapping("/logs/byLevel")
     public List<Log> getLogsByLevel(@RequestParam LogLevel level) {
         return logService.getLogsByLevel(level);
+    }
+
+    @PostMapping("/logs/create")
+    public Log createLog(@RequestBody Log log)
+    {
+        return logService.createLog(log);
     }
 }

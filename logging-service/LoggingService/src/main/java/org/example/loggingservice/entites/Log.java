@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Log {
 
     @Id
-    private long id;
+    private String id;
 
     private LogLevel level;
     private String message;
