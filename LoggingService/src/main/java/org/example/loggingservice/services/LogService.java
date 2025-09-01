@@ -26,7 +26,6 @@ public class LogService {
         return logRepository.findByLevel(level);
     }
 
-
     public List<Log> getCriticalLogs() {
         return logRepository.findLogsWithCustomFilter("CRITICAL");
     }
