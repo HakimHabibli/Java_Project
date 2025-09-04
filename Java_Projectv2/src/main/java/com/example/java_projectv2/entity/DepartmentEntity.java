@@ -16,8 +16,8 @@ public class DepartmentEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String DepartmentName;
+    private String departmentName;
 
-    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EmployeeEntity> employees;
 }
