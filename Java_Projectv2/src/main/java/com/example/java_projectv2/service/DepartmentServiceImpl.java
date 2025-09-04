@@ -1,8 +1,12 @@
 package com.example.java_projectv2.service;
 
 import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.department.DepartmentGetDto;
 import com.example.java_projectv2.entity.DepartmentEntity;
+import com.example.java_projectv2.mapper.DepartmentMapper;
 import com.example.java_projectv2.repository.DepartmentRepository;
+import com.example.java_projectv2.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,16 +16,20 @@ import java.util.Optional;
 public class DepartmentServiceImpl implements DepartmentService
 {
     private final DepartmentRepository departmentRepository;
+    private final DepartmentMapper departmentMapper;
 
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository)
+    @Autowired
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper)
     {
         this.departmentRepository = departmentRepository;
+        this.departmentMapper = departmentMapper;
     }
 
     @Override
-    public List<DepartmentEntity> getAllDepartments()
+    public List<DepartmentGetDto> getAllDepartments()
     {
-        return departmentRepository.findAll();
+        var entity =  departmentRepository.findAll();
+        return departmentMapper.toGetDepartmentDtoList(entity);
     }
     @Override
     public Optional<DepartmentEntity> getDepartmentById(long id)

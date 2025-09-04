@@ -2,6 +2,7 @@ package com.example.java_projectv2.controller;
 
 
 import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.department.DepartmentGetDto;
 import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.service.DepartmentService;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class DepartmentController
     }
 
     @GetMapping
-    public List<DepartmentEntity> getDepartments()
+        public List<DepartmentGetDto> getDepartments()
     {
         return departmentService.getAllDepartments();
     }
