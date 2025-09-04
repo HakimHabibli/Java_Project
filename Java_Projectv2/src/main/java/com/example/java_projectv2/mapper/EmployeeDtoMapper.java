@@ -19,8 +19,11 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
                         employee.getSalary()
                 );
     }
-    public EmployeeEntity toEntity(EmployeeDto dto) {
+    public EmployeeEntity toEntity(EmployeeDto dto)
+    {
         EmployeeEntity entity = new EmployeeEntity();
+
+        entity.setId(dto.id());
         entity.setName(dto.name());
         entity.setPosition(dto.position());
         entity.setSalary(dto.salary());

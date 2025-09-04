@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -17,4 +19,10 @@ public class EmployeeEntity {
     private String position;
     private double salary;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private DepartmentEntity  department;
+
 }
+
+

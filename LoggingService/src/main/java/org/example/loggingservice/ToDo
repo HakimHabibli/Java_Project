@@ -2,4 +2,5 @@ Write
 Dto
 Custom Query
 Mapping Dto with package
-SMTP file
+SMTP file+RabbitMq
+Aspect-Oriented Programming(AOP)

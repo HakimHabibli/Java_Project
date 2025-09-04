@@ -4,17 +4,28 @@ Config Folder
 DbConfig,JwtConfig,EmailConfig,LoggingConfig
 
 
-Dto Folder----Success
-Add Another Class
+
+Add Another Class(Department entity)
 Add Dto which one pay the SR rule
 
 MiddleWare Folder
-Validation add ----Success
-ExceptionHandling add ----Success
 Api Key Add
 Logging Add
 
-Pagination Add
+Pagination Add--Spring Data ilə Pageable
 Search Function Add for model another Field
 
-Security
+Security--JwtConfig
+
+
+UnitOfWork
+MapStruct
+Custom Query (JPA Criteria API və ya Specification pattern ilə)
+
+----
+Dto Folder----Success
+Validation add ----Success
+ExceptionHandling add ----Success
+----
+Maybe
+Redis For some useful enpoints

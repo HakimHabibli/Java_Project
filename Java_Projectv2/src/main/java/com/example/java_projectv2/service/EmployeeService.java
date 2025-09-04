@@ -49,20 +49,16 @@ public class EmployeeService
         _employeeRepository.deleteById(id);
     }
 
-    public EmployeeDto updateEmployee(int id, EmployeeEntity updatedEmployee) {
+    public EmployeeDto updateEmployee(int id, EmployeeDto updatedEmployeeDto) {
         EmployeeEntity exist = _employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
-        exist.setName(updatedEmployee.getName());
-        exist.setPosition(updatedEmployee.getPosition());
-        exist.setSalary(updatedEmployee.getSalary());
+        exist.setName(updatedEmployeeDto.name());
+        exist.setPosition(updatedEmployeeDto.position());
+        exist.setSalary(updatedEmployeeDto.salary());
 
         var savedEmployee =  _employeeRepository.save(exist);
 
-        return new EmployeeDto(
-                savedEmployee.getId(),
-                savedEmployee.getPosition(),
-                savedEmployee.getName(),
-                savedEmployee.getSalary());
+        return _employeeDtoMapper.apply(savedEmployee);
     }
 }
