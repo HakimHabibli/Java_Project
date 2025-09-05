@@ -1,19 +1,20 @@
 package com.example.java_projectv2.service;
 
 import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.department.DepartmentCreateDto;
+import com.example.java_projectv2.dto.department.DepartmentDeleteDto;
 import com.example.java_projectv2.dto.department.DepartmentGetDto;
-import com.example.java_projectv2.entity.DepartmentEntity;
-
+import com.example.java_projectv2.dto.department.DepartmentUpdateDto;
 import java.util.List;
-import java.util.Optional;
 
 public interface DepartmentService
 {
     List<DepartmentGetDto> getAllDepartments();
-    Optional<DepartmentEntity> getDepartmentById(long id);
-    DepartmentEntity createDepartment(DepartmentEntity departmentEntity);
-    DepartmentEntity updateDepartment(DepartmentEntity departmentEntity);
-    void deleteDepartmentById(long id);
+    DepartmentGetDto getDepartmentById(long id);
+    DepartmentCreateDto createDepartment(DepartmentCreateDto departmentCreateDto);
+    DepartmentUpdateDto updateDepartment(DepartmentUpdateDto departmentUpdateDto);
+
+    void deleteDepartmentById(DepartmentDeleteDto departmentDeleteDto);
 
 
     List<EmployeeDto> findAllEmployeesByDepartmentId(long id);

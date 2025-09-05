@@ -1,8 +1,6 @@
 package com.example.java_projectv2.exception;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
-
-@ControllerAdvice
+//TODO BUSINESS Logic write in department entity
 public class ValidationException extends RuntimeException
 {
     public ValidationException(){}
@@ -14,5 +12,4 @@ public class ValidationException extends RuntimeException
     {
         super(message,cause);
     }
-    
 }

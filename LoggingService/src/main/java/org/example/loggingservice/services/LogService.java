@@ -1,8 +1,10 @@
 package org.example.loggingservice.services;
 
 
+import org.example.loggingservice.dtos.LogDto;
 import org.example.loggingservice.entites.Log;
 import org.example.loggingservice.enums.LogLevel;
+import org.example.loggingservice.mapper.LogMapper;
 import org.example.loggingservice.repositories.LogRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,10 @@ import java.util.List;
 @Service
 public class LogService {
     private final LogRepository logRepository;
-    public LogService(LogRepository logRepository) {
+    private   final LogMapper logMapper;
+    public LogService(LogRepository logRepository, LogMapper logMapper) {
         this.logRepository = logRepository;
+        this.logMapper = logMapper;
     }
 
 
@@ -21,12 +25,17 @@ public class LogService {
         return logRepository.save(log);
     }
 
-    public List<Log> getLogsByLevel(LogLevel level)
+    public List<LogDto> getLogsByLevel(LogLevel level)
     {
-        return logRepository.findByLevel(level);
+        var entity = logRepository.findByLevel(level);
+        return logMapper.toLogDto(entity);
     }
 
     public List<Log> getCriticalLogs() {
         return logRepository.findLogsWithCustomFilter("CRITICAL");
+    }
+
+    public List<Log> getLogsWithCustomFilter(String filter) {
+        return logRepository.findLogsWithCustomFilter(filter);
     }
 }

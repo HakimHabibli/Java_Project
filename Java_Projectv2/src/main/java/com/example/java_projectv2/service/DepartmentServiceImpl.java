@@ -1,16 +1,18 @@
 package com.example.java_projectv2.service;
 
 import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.department.DepartmentCreateDto;
+import com.example.java_projectv2.dto.department.DepartmentDeleteDto;
 import com.example.java_projectv2.dto.department.DepartmentGetDto;
+import com.example.java_projectv2.dto.department.DepartmentUpdateDto;
 import com.example.java_projectv2.entity.DepartmentEntity;
+import com.example.java_projectv2.exception.ResourceNotFoundException;
 import com.example.java_projectv2.mapper.DepartmentMapper;
 import com.example.java_projectv2.repository.DepartmentRepository;
-import com.example.java_projectv2.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService
@@ -32,25 +34,29 @@ public class DepartmentServiceImpl implements DepartmentService
         return departmentMapper.toGetDepartmentDtoList(entity);
     }
     @Override
-    public Optional<DepartmentEntity> getDepartmentById(long id)
+    public DepartmentGetDto getDepartmentById(long id)
     {
-        return departmentRepository.findById(id);
+        DepartmentEntity entity = departmentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Department not found"));
+        return departmentMapper.toGetDepartmentDto(entity);
     }
 
     @Override
-    public DepartmentEntity createDepartment(DepartmentEntity departmentEntity) {
-        return departmentRepository.save(departmentEntity);
+    public DepartmentCreateDto createDepartment(DepartmentCreateDto departmentCreateDto) {
+        var entity = departmentRepository.save(departmentMapper.toDepartmentCreateEntity(departmentCreateDto));
+
+        return departmentMapper.toDepartmentCreateDto(entity);
     }
 
     @Override
-    public DepartmentEntity updateDepartment(DepartmentEntity departmentEntity) {
-        return departmentRepository.save(departmentEntity);
+    public DepartmentUpdateDto updateDepartment(DepartmentUpdateDto departmentUpdateDto) {
+        var entity = departmentRepository.save(departmentMapper.toDepartmentUpdateEntity(departmentUpdateDto));
+        return departmentMapper.toDepartmentUpdateDto(entity);
     }
 
     @Override
-    public void deleteDepartmentById(long id)
+    public void deleteDepartmentById(DepartmentDeleteDto departmentDeleteDto)
     {
-         departmentRepository.deleteById(id);
+        departmentRepository.deleteById(departmentDeleteDto.getId());
     }
 
     @Override

@@ -1,8 +1,10 @@
 package org.example.loggingservice.controllers;
 
+import org.example.loggingservice.dtos.LogDto;
 import org.example.loggingservice.entites.Log;
 import org.example.loggingservice.enums.LogLevel;
 import org.example.loggingservice.services.LogService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +19,20 @@ public class LogController
     }
 
     @GetMapping("/logs/byLevel")
-    public List<Log> getLogsByLevel(@RequestParam LogLevel level) {
-        return logService.getLogsByLevel(level);
+    public ResponseEntity<List<LogDto>> getLogsByLevel(@RequestParam LogLevel level) {
+        return ResponseEntity.ok(logService.getLogsByLevel(level));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<Log>> getLogsWithFilter(@RequestParam String filter) {
+        return ResponseEntity.ok(logService.getLogsWithCustomFilter(filter));
     }
 
     @PostMapping("/logs/create")
-    public Log createLog(@RequestBody Log log)
+    public ResponseEntity<Log> createLog(@RequestBody Log log)
     {
-        return logService.createLog(log);
+        return ResponseEntity.ok(logService.createLog(log));
     }
+
+
 }

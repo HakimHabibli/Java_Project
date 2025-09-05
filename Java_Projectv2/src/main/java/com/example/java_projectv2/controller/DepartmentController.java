@@ -2,7 +2,10 @@ package com.example.java_projectv2.controller;
 
 
 import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.department.DepartmentCreateDto;
+import com.example.java_projectv2.dto.department.DepartmentDeleteDto;
 import com.example.java_projectv2.dto.department.DepartmentGetDto;
+import com.example.java_projectv2.dto.department.DepartmentUpdateDto;
 import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.service.DepartmentService;
 import org.springframework.stereotype.Controller;
@@ -26,33 +29,34 @@ public class DepartmentController
         return departmentService.getAllDepartments();
     }
 
-    @GetMapping("/{id}/employees")
-    public List<EmployeeDto> getAllEmployeesByDepartmentId(@PathVariable long id) {
-        return departmentService.findAllEmployeesByDepartmentId(id);
-    }
-
     @GetMapping("id")
-    public Optional<DepartmentEntity> getDepartmentById(@RequestParam long id)
+    public DepartmentGetDto getDepartmentById(@RequestParam long id)
     {
         return departmentService.getDepartmentById(id);
     }
 
     @PostMapping
-    public DepartmentEntity createDepartment(@RequestBody DepartmentEntity department)
+    public DepartmentCreateDto createDepartment(@RequestBody DepartmentCreateDto department)
     {
         return departmentService.createDepartment(department);
     }
 
 
     @PutMapping
-    public DepartmentEntity updateDepartment(@RequestBody DepartmentEntity department)
+    public DepartmentUpdateDto updateDepartment(@RequestBody DepartmentUpdateDto department)
     {
         return departmentService.updateDepartment(department);
     }
 
     @DeleteMapping
-    public void deleteDepartmentById(@RequestParam long id)
+    public void deleteDepartmentById(@RequestParam DepartmentDeleteDto departmentDeleteDto)
     {
-        departmentService.deleteDepartmentById(id);
+        departmentService.deleteDepartmentById(departmentDeleteDto);
     }
+
+    @GetMapping("/{id}/employees")
+    public List<EmployeeDto> getAllEmployeesByDepartmentId(@PathVariable long id) {
+        return departmentService.findAllEmployeesByDepartmentId(id);
+    }
+
 }

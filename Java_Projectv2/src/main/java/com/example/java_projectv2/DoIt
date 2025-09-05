@@ -3,9 +3,7 @@ TODO
 Config Folder
 DbConfig,JwtConfig,EmailConfig,LoggingConfig
 
-
-
-Add Another Class(Department entity)
+Add Another Class(Department entity)+
 Add Dto which one pay the SR rule
 
 MiddleWare Folder
@@ -17,12 +15,10 @@ Search Function Add for model another Field
 
 Security--JwtConfig
 
-
 UnitOfWork
-MapStruct
-Custom Query (JPA Criteria API və ya Specification pattern ilə)
-
 ----
+MapStruct----Success
+Custom Query (JPA Criteria API və ya Specification pattern ilə)----Success
 Dto Folder----Success
 Validation add ----Success
 ExceptionHandling add ----Success
