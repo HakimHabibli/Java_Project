@@ -4,7 +4,9 @@ import com.example.java_projectv2.dto.EmployeeDto;
 import com.example.java_projectv2.entity.EmployeeEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
@@ -18,6 +20,11 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
                         employee.getPosition(),
                         employee.getSalary()
                 );
+    }
+    public List<EmployeeDto> toEntityList(List<EmployeeEntity> employees)
+    {
+        return employees.stream()
+                .map(this::apply).collect(Collectors.toList());
     }
     public EmployeeEntity toEntity(EmployeeDto dto)
     {

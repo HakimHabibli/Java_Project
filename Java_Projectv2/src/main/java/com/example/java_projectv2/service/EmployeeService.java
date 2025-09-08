@@ -61,4 +61,10 @@ public class EmployeeService
 
         return _employeeDtoMapper.apply(savedEmployee);
     }
+
+    public List<EmployeeDto> getEmployeesByDepartmentName(String departmentName)
+    {
+        var entity =  _employeeRepository.findByDepartment_DepartmentName(departmentName);
+        return  _employeeDtoMapper.toEntityList(entity);
+    }
 }

@@ -33,7 +33,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDto> createEmployee(@Valid @RequestBody EmployeeDto employee) {
+    public ResponseEntity<EmployeeDto> createEmployee(@Valid @RequestBody EmployeeDto employee)
+    {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(employeeService.createEmployee(employee));
     }
@@ -47,6 +48,11 @@ public class EmployeeController {
     @PutMapping("/{id}")
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable int id,@Valid @RequestBody EmployeeDto employeeDto) {
         return ResponseEntity.ok(employeeService.updateEmployee(id, employeeDto));
+    }
+
+    @GetMapping("/by-department")
+    public List<EmployeeDto> getEmployeesByDepartment(@RequestParam String departmentName) {
+        return employeeService.getEmployeesByDepartmentName(departmentName);
     }
 }
 

@@ -4,7 +4,7 @@ import com.example.java_projectv2.entity.DepartmentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DepartmentRepository
-        extends JpaRepository<DepartmentEntity,Long>,CustomDepartmentRepository
+        extends IGenericRepository<DepartmentEntity,Long>,CustomDepartmentRepository
 {
 
 }

@@ -2,6 +2,7 @@ package com.example.java_projectv2.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -27,6 +28,27 @@ public class GlobalExceptionHandler
     {
         Map<String,Object> map =  buildResponse(ex,request);
         return  new ResponseEntity<>(map, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleMethodArgumentNotValidException
+            (
+                    MethodArgumentNotValidException ex , WebRequest request
+            )
+    {
+        Map<String, Object> map = new HashMap<>();
+        map.put("timestamp", new Date());
+        map.put("path", request.getDescription(false).replace("uri=", ""));
+
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.put(error.getField(), error.getDefaultMessage())
+        );
+
+        map.put("message", "Validation failed");
+        map.put("errors", errors);
+
+        return new ResponseEntity<>(map, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(value = ValidationException.class)
