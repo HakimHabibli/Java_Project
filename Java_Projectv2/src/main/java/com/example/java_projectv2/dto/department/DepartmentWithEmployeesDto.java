@@ -1,7 +1,6 @@
 package com.example.java_projectv2.dto.department;
 
-import com.example.java_projectv2.dto.EmployeeDto;
-import com.fasterxml.jackson.databind.ser.Serializers;
+import com.example.java_projectv2.dto.employee.EmployeeDto;
 import lombok.Getter;
 import lombok.Setter;
 

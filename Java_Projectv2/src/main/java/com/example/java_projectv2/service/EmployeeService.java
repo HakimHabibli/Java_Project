@@ -1,6 +1,7 @@
 package com.example.java_projectv2.service;
 
-import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.employee.EmployeeDto;
+import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
 import com.example.java_projectv2.entity.EmployeeEntity;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
 import com.example.java_projectv2.mapper.EmployeeDtoMapper;
@@ -8,7 +9,6 @@ import com.example.java_projectv2.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,20 +37,21 @@ public class EmployeeService
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
     }
 
-    public EmployeeDto createEmployee(EmployeeDto employeeDto)
+    public EmployeeCreateDto createEmployee(EmployeeCreateDto employeeCreateDto)
     {
-        EmployeeEntity savedEntity =
-                _employeeRepository.save(_employeeDtoMapper.toEntity(employeeDto));
-        return _employeeDtoMapper.apply(savedEntity);
+       var entity =  _employeeRepository.save(_employeeDtoMapper.toEntity(employeeCreateDto));
+        return _employeeDtoMapper.toEmployeeCreateDto(entity);
     }
 
     public void deleteEmployee(int id)
+
     {
         _employeeRepository.deleteById(id);
     }
 
-    public EmployeeDto updateEmployee(int id, EmployeeDto updatedEmployeeDto) {
-        EmployeeEntity exist = _employeeRepository.findById(id)
+    public EmployeeDto updateEmployee(EmployeeDto updatedEmployeeDto)
+    {
+        EmployeeEntity exist = _employeeRepository.findById(updatedEmployeeDto.id())
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
         exist.setName(updatedEmployeeDto.name());

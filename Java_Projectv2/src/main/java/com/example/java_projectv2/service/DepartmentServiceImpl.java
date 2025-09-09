@@ -1,6 +1,6 @@
 package com.example.java_projectv2.service;
 
-import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.department.DepartmentCreateDto;
 import com.example.java_projectv2.dto.department.DepartmentDeleteDto;
 import com.example.java_projectv2.dto.department.DepartmentGetDto;

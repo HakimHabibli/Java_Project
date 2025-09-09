@@ -1,17 +1,15 @@
 package com.example.java_projectv2.controller;
 
 
-import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.department.DepartmentCreateDto;
 import com.example.java_projectv2.dto.department.DepartmentDeleteDto;
 import com.example.java_projectv2.dto.department.DepartmentGetDto;
 import com.example.java_projectv2.dto.department.DepartmentUpdateDto;
-import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.service.DepartmentService;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/department")
@@ -24,16 +22,17 @@ public class DepartmentController
     }
 
     @GetMapping
-        public List<DepartmentGetDto> getDepartments()
+    public List<DepartmentGetDto> getDepartments()
     {
         return departmentService.getAllDepartments();
     }
 
-    @GetMapping("id")
-    public DepartmentGetDto getDepartmentById(@RequestParam long id)
+    @GetMapping("{id}")
+    public DepartmentGetDto getDepartmentById(@PathVariable long id)
     {
         return departmentService.getDepartmentById(id);
     }
+
 
     @PostMapping
     public DepartmentCreateDto createDepartment(@RequestBody DepartmentCreateDto department)
@@ -49,9 +48,10 @@ public class DepartmentController
     }
 
     @DeleteMapping
-    public void deleteDepartmentById(@RequestParam DepartmentDeleteDto departmentDeleteDto)
+    public ResponseEntity<Void> deleteDepartmentById(@RequestBody DepartmentDeleteDto departmentDeleteDto)
     {
         departmentService.deleteDepartmentById(departmentDeleteDto);
+        return  ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/employees")

@@ -1,6 +1,8 @@
 package com.example.java_projectv2.mapper;
 
-import com.example.java_projectv2.dto.EmployeeDto;
+import com.example.java_projectv2.dto.employee.EmployeeDto;
+import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
+import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.entity.EmployeeEntity;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,10 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
                         employee.getSalary()
                 );
     }
+    public EmployeeCreateDto toEmployeeCreateDto(EmployeeEntity employee) {
+        return new EmployeeCreateDto(
+                employee.getId(),employee.getName(),employee.getPosition(),employee.getSalary(),employee.getDepartment().getId());
+    }
     public List<EmployeeDto> toEntityList(List<EmployeeEntity> employees)
     {
         return employees.stream()
@@ -36,4 +42,19 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
         entity.setSalary(dto.salary());
         return entity;
     }
+    public EmployeeEntity toEntity(EmployeeCreateDto dto) {
+        EmployeeEntity entity = new EmployeeEntity();
+        entity.setName(dto.name());
+        entity.setPosition(dto.position());
+        entity.setSalary(dto.salary());
+
+        if (dto.departmentId() != null) {
+            DepartmentEntity dept = new DepartmentEntity();
+            dept.setId(dto.departmentId());
+            entity.setDepartment(dept);
+        }
+
+        return entity;
+    }
+
 }

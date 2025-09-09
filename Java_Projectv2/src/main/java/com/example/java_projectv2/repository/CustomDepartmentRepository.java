@@ -1,10 +1,6 @@
 package com.example.java_projectv2.repository;
 
-import com.example.java_projectv2.dto.EmployeeDto;
-import com.example.java_projectv2.repository.base.IReadRepository;
-import com.example.java_projectv2.repository.base.IWriteRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
+import com.example.java_projectv2.dto.employee.EmployeeDto;
 
 import java.util.List;
 

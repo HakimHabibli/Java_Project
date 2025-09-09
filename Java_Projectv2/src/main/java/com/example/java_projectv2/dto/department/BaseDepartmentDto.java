@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 public abstract class BaseDepartmentDto
 {
-    Long id;
+    private Long id;
 }
 

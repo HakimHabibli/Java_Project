@@ -1,7 +1,7 @@
 package com.example.java_projectv2.controller;
 
-import com.example.java_projectv2.dto.EmployeeDto;
-import com.example.java_projectv2.entity.EmployeeEntity;
+import com.example.java_projectv2.dto.employee.EmployeeDto;
+import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
 import com.example.java_projectv2.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -33,23 +32,23 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDto> createEmployee(@Valid @RequestBody EmployeeDto employee)
+    public ResponseEntity<EmployeeCreateDto> createEmployee(@Valid @RequestBody EmployeeCreateDto employee)
     {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(employeeService.createEmployee(employee));
     }
+
+    @PutMapping
+    public ResponseEntity<EmployeeDto> updateEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
+        return ResponseEntity.ok(employeeService.updateEmployee(employeeDto));
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable int id) {
         employeeService.deleteEmployee(id);
         return ResponseEntity.noContent().build();
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable int id,@Valid @RequestBody EmployeeDto employeeDto) {
-        return ResponseEntity.ok(employeeService.updateEmployee(id, employeeDto));
-    }
-
     @GetMapping("/by-department")
     public List<EmployeeDto> getEmployeesByDepartment(@RequestParam String departmentName) {
         return employeeService.getEmployeesByDepartmentName(departmentName);

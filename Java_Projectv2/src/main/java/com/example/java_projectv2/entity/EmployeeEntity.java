@@ -23,6 +23,7 @@ public class EmployeeEntity {
     @JoinColumn(name = "department_id")
     private DepartmentEntity  department;
 
+
 }
 
 
