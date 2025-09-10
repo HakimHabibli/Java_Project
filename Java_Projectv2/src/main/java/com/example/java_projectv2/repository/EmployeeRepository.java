@@ -7,8 +7,8 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository
-    extends IGenericRepository<EmployeeEntity, Integer>
+    extends IGenericRepository<EmployeeEntity, Long>
 {
     public List<EmployeeEntity> findByDepartment_DepartmentName(String departmentName);
-
+    boolean existsByFinCode(String employeeFinCode);
 }

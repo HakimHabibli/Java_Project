@@ -14,7 +14,7 @@ public class DepartmentRepositoryImpl implements CustomDepartmentRepository
     private EntityManager em;
 
     @Override
-    public List<EmployeeDto> findAllEmployeesByDeparmentId(long id) {
+    public List<EmployeeDto> findAllEmployeesByDeparmentId(Long id) {
         return em.createQuery(
                         "SELECT new com.example.java_projectv2.dto.employee.EmployeeDto(e.id, e.name, e.position,e.salary) " +
                                 "FROM EmployeeEntity e " +
@@ -22,4 +22,6 @@ public class DepartmentRepositoryImpl implements CustomDepartmentRepository
                 .setParameter("deptId", id)
                 .getResultList();
     }
+
+
 }

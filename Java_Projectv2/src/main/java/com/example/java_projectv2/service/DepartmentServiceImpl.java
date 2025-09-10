@@ -9,6 +9,8 @@ import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
 import com.example.java_projectv2.mapper.DepartmentMapper;
 import com.example.java_projectv2.repository.DepartmentRepository;
+import com.example.java_projectv2.repository.EmployeeRepository;
+import com.example.java_projectv2.rules.DepartmentRules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +21,14 @@ public class DepartmentServiceImpl implements DepartmentService
 {
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapper departmentMapper;
+    private final DepartmentRules departmentRules;
 
     @Autowired
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper)
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper, DepartmentRules departmentRules)
     {
         this.departmentRepository = departmentRepository;
         this.departmentMapper = departmentMapper;
+        this.departmentRules = departmentRules;
     }
 
     @Override
@@ -33,8 +37,9 @@ public class DepartmentServiceImpl implements DepartmentService
         var entity =  departmentRepository.findAll();
         return departmentMapper.toGetDepartmentDtoList(entity);
     }
+
     @Override
-    public DepartmentGetDto getDepartmentById(long id)
+    public DepartmentGetDto getDepartmentById(Long id)
     {
         DepartmentEntity entity = departmentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Department not found"));
         return departmentMapper.toGetDepartmentDto(entity);
@@ -42,14 +47,25 @@ public class DepartmentServiceImpl implements DepartmentService
 
     @Override
     public DepartmentCreateDto createDepartment(DepartmentCreateDto departmentCreateDto) {
-        var entity = departmentRepository.save(departmentMapper.toDepartmentCreateEntity(departmentCreateDto));
 
-        return departmentMapper.toDepartmentCreateDto(entity);
+        var entity = departmentMapper.toDepartmentCreateEntity(departmentCreateDto);
+
+        //Business check
+        departmentRules.checkNotNull(entity);
+        departmentRules.checkIfUnique(entity);
+
+        var saveEntity = departmentRepository.save(entity);
+        return departmentMapper.toDepartmentCreateDto(saveEntity);
     }
 
     @Override
     public DepartmentUpdateDto updateDepartment(DepartmentUpdateDto departmentUpdateDto) {
-        var entity = departmentRepository.save(departmentMapper.toDepartmentUpdateEntity(departmentUpdateDto));
+        var entity = departmentMapper.toDepartmentUpdateEntity(departmentUpdateDto);
+
+        departmentRules.checkNotNull(entity);
+        departmentRules.checkIfUnique(entity);
+        departmentRepository.save(entity);
+
         return departmentMapper.toDepartmentUpdateDto(entity);
     }
 
@@ -60,7 +76,7 @@ public class DepartmentServiceImpl implements DepartmentService
     }
 
     @Override
-    public List<EmployeeDto> findAllEmployeesByDepartmentId(long id) {
+    public List<EmployeeDto> findAllEmployeesByDepartmentId(Long id) {
         return departmentRepository.findAllEmployeesByDeparmentId(id);
     }
 

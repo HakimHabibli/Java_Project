@@ -22,12 +22,28 @@ public class GlobalExceptionHandler
         return  new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = NotNullException.class)
+    public ResponseEntity<?> handleNotNullException
+            (NotNullException ex, WebRequest request)
+    {
+        Map<String,Object> map = buildResponse(ex, request);
+        return  new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = DuplicateResourceException.class)
     public ResponseEntity<?> handleDuplicateResourceException
             (DuplicateResourceException ex, WebRequest request)
     {
         Map<String,Object> map =  buildResponse(ex,request);
         return  new ResponseEntity<>(map, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(value = BusinessException.class)
+    public ResponseEntity<?> handleBusinessException
+            (BusinessException ex, WebRequest request)
+    {
+        Map<String,Object> map =  buildResponse(ex,request);
+        return  new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)

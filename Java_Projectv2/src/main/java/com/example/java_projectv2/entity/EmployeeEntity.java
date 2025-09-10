@@ -14,10 +14,11 @@ import java.util.List;
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String position;
     private double salary;
+    private String finCode;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
@@ -25,5 +26,7 @@ public class EmployeeEntity {
 
 
 }
+//TODO :FIN ve ya ID elave edilmeli unik olmalidi string toupper kimi method istifade edilmelidi
+
 
 

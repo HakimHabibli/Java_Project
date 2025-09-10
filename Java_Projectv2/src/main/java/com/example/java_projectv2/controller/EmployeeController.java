@@ -26,7 +26,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable int id)
+    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable Long id)
     {
        return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
@@ -45,7 +45,7 @@ public class EmployeeController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable int id) {
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
         return ResponseEntity.noContent().build();
     }

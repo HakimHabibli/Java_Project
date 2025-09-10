@@ -10,12 +10,12 @@ import java.util.List;
 public interface DepartmentService
 {
     List<DepartmentGetDto> getAllDepartments();
-    DepartmentGetDto getDepartmentById(long id);
+    DepartmentGetDto getDepartmentById(Long id);
     DepartmentCreateDto createDepartment(DepartmentCreateDto departmentCreateDto);
     DepartmentUpdateDto updateDepartment(DepartmentUpdateDto departmentUpdateDto);
 
     void deleteDepartmentById(DepartmentDeleteDto departmentDeleteDto);
 
 
-    List<EmployeeDto> findAllEmployeesByDepartmentId(long id);
+    List<EmployeeDto> findAllEmployeesByDepartmentId(Long id);
 }

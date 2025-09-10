@@ -20,12 +20,13 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
                         employee.getId(),
                         employee.getName(),
                         employee.getPosition(),
-                        employee.getSalary()
+                        employee.getSalary(),
+                        employee.getFinCode()
                 );
     }
     public EmployeeCreateDto toEmployeeCreateDto(EmployeeEntity employee) {
         return new EmployeeCreateDto(
-                employee.getId(),employee.getName(),employee.getPosition(),employee.getSalary(),employee.getDepartment().getId());
+                employee.getId(),employee.getName(),employee.getPosition(),employee.getSalary(),employee.getDepartment().getId(),employee.getFinCode());
     }
     public List<EmployeeDto> toEntityList(List<EmployeeEntity> employees)
     {
@@ -40,6 +41,7 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
         entity.setName(dto.name());
         entity.setPosition(dto.position());
         entity.setSalary(dto.salary());
+        entity.setFinCode(dto.finCode());
         return entity;
     }
     public EmployeeEntity toEntity(EmployeeCreateDto dto) {
@@ -47,6 +49,7 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
         entity.setName(dto.name());
         entity.setPosition(dto.position());
         entity.setSalary(dto.salary());
+        entity.setFinCode(dto.finCode());
 
         if (dto.departmentId() != null) {
             DepartmentEntity dept = new DepartmentEntity();

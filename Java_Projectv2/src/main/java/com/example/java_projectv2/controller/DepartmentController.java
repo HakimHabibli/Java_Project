@@ -7,6 +7,8 @@ import com.example.java_projectv2.dto.department.DepartmentDeleteDto;
 import com.example.java_projectv2.dto.department.DepartmentGetDto;
 import com.example.java_projectv2.dto.department.DepartmentUpdateDto;
 import com.example.java_projectv2.service.DepartmentService;
+import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -22,29 +24,29 @@ public class DepartmentController
     }
 
     @GetMapping
-    public List<DepartmentGetDto> getDepartments()
+    public ResponseEntity< List<DepartmentGetDto>> getDepartments()
     {
-        return departmentService.getAllDepartments();
+        return ResponseEntity.ok().body(departmentService.getAllDepartments());
     }
 
     @GetMapping("{id}")
-    public DepartmentGetDto getDepartmentById(@PathVariable long id)
+    public ResponseEntity<DepartmentGetDto> getDepartmentById(@PathVariable Long id)
     {
-        return departmentService.getDepartmentById(id);
+        return ResponseEntity.ok().body(departmentService.getDepartmentById(id));
     }
 
 
     @PostMapping
-    public DepartmentCreateDto createDepartment(@RequestBody DepartmentCreateDto department)
+    public ResponseEntity<DepartmentCreateDto> createDepartment(@Valid @RequestBody DepartmentCreateDto department)
     {
-        return departmentService.createDepartment(department);
+        return ResponseEntity.ok().body(departmentService.createDepartment(department));
     }
 
 
     @PutMapping
-    public DepartmentUpdateDto updateDepartment(@RequestBody DepartmentUpdateDto department)
+    public ResponseEntity<DepartmentUpdateDto> updateDepartment(@Valid @RequestBody DepartmentUpdateDto department)
     {
-        return departmentService.updateDepartment(department);
+        return  ResponseEntity.ok().body(departmentService.updateDepartment(department));
     }
 
     @DeleteMapping
@@ -55,8 +57,9 @@ public class DepartmentController
     }
 
     @GetMapping("/{id}/employees")
-    public List<EmployeeDto> getAllEmployeesByDepartmentId(@PathVariable long id) {
-        return departmentService.findAllEmployeesByDepartmentId(id);
+    public ResponseEntity<List<EmployeeDto>> getAllEmployeesByDepartmentId(@PathVariable Long id) {
+
+        return ResponseEntity.ok().body(departmentService.findAllEmployeesByDepartmentId(id));
     }
 
 }

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 public record EmployeeDto(
 
 
-        int id,
+        Long id,
 
         @NotBlank(message = "Name cannot be blank")
         @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
@@ -17,5 +17,7 @@ public record EmployeeDto(
         String position,
 
         @Min(value = 0, message = "Salary must be positive")
-        double salary
+        double salary,
+
+        String finCode
 ) { }

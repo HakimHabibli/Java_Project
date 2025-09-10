@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface DepartmentRepository
         extends IGenericRepository<DepartmentEntity,Long>,CustomDepartmentRepository
 {
+     boolean existsByDepartmentName(String departmentName);
 
 }
 
