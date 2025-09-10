@@ -3,15 +3,15 @@ TODO
 Config Folder
 DbConfig,JwtConfig,EmailConfig,LoggingConfig
 
-Add Another Class(Department entity)+
-Add Dto which one pay the SR rule
+
 
 MiddleWare Folder
 Api Key Add
 Logging Add
 
+Aspect-Oriented Programming(AOP)
+
 Pagination Add--Spring Data ilə Pageable
-Search Function Add for model another Field
 
 Security--JwtConfig
 
@@ -22,6 +22,9 @@ Custom Query (JPA Criteria API və ya Specification pattern ilə)----Success
 Dto Folder----Success
 Validation add ----Success
 ExceptionHandling add ----Success
+Search Function Add for model another Field ----Success
+Add Another Class(Department entity) ----Success
+Add Dto which one pay the SR rule ----Success
 ----
 Maybe
 Redis For some useful enpoints
