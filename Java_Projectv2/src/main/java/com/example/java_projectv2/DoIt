@@ -3,13 +3,16 @@ TODO
 Config Folder
 DbConfig,JwtConfig,EmailConfig,LoggingConfig
 
-
-
 MiddleWare Folder
 Api Key Add
 Logging Add
 
 Aspect-Oriented Programming(AOP)
+{
+    Connect 2 services
+    added Rabbit for LogService
+    Added Login Register and added log more detailed
+}
 
 Pagination Add--Spring Data ilə Pageable
 

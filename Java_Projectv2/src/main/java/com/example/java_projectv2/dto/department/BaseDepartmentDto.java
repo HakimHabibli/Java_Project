@@ -10,3 +10,4 @@ public abstract class BaseDepartmentDto
     private Long id;
 }
 
+
