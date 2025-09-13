@@ -32,8 +32,7 @@ public class DepartmentAspect
         LogDto dto = new LogDto();
         dto.setLevel(LogLevel.INFO);
         dto.setMessage("Department Service has been executed successfully");
-//        dto.setTimestamp(new Date());
-        _log.writeLogToLogService(dto);
+        _log.writeLogToLogServiceAsync(dto);
     }
 
     @Before("pointCut()")

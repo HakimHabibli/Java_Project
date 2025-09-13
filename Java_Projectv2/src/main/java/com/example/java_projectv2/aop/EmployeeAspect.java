@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Date;
 
@@ -15,11 +16,16 @@ import java.util.Date;
 @Aspect
 public class EmployeeAspect
 {
-    Log log = new Log();
+    private final Log log;
+
+    public EmployeeAspect(Log log) {
+        this.log = log;
+    }
+
+
     @Pointcut("execution(* com.example.java_projectv2.service.EmployeeService.*(..))")
     public void employeeMethods()
     {
-
         log.writeLogToFile("Employee methods before execution" + new Date());
     }
 

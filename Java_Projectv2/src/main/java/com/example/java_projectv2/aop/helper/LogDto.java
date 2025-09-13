@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -16,6 +14,5 @@ public class LogDto
 
         private LogLevel level;
         private String message;
-//        private Date timestamp;
 }
 

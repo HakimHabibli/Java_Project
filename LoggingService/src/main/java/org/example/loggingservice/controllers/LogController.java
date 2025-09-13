@@ -23,6 +23,13 @@ public class LogController
         return ResponseEntity.ok(logService.getLogsByLevel(level));
     }
 
+    @GetMapping("/logs/getall")
+    public ResponseEntity<List<LogDto>> getAllLogs()
+    {
+
+        return ResponseEntity.ok(logService.getAllLogs());
+    }
+
     @GetMapping("/filter")
     public ResponseEntity<List<Log>> getLogsWithFilter(@RequestParam String filter) {
         return ResponseEntity.ok(logService.getLogsWithCustomFilter(filter));

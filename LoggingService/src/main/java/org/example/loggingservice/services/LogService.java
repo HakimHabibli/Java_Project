@@ -19,6 +19,12 @@ public class LogService {
         this.logMapper = logMapper;
     }
 
+    public List<LogDto> getAllLogs()
+    {
+        var result = logRepository.findAll();
+
+        return logMapper.toLogDto(result);
+    }
 
     public Log createLog(Log log)
     {
