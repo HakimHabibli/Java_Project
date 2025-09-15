@@ -32,11 +32,15 @@
         <module name="LoggingService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="UploadSalaryService" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Java_Projectv2" options="-parameters" />
       <module name="LoggingService" options="-parameters" />
+      <module name="UploadSalaryService" options="-parameters" />
     </option>
   </component>
 </project>

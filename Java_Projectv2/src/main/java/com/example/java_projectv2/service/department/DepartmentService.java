@@ -1,4 +1,4 @@
-package com.example.java_projectv2.service;
+package com.example.java_projectv2.service.department;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.department.DepartmentCreateDto;

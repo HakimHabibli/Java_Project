@@ -1,11 +1,11 @@
-package com.example.java_projectv2.service;
+package com.example.java_projectv2.service.employee;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
 import com.example.java_projectv2.entity.EmployeeEntity;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
 import com.example.java_projectv2.mapper.EmployeeDtoMapper;
-import com.example.java_projectv2.repository.EmployeeRepository;
+import com.example.java_projectv2.repository.employee.EmployeeRepository;
 import com.example.java_projectv2.rules.EmployeeRules;
 import org.springframework.stereotype.Service;
 

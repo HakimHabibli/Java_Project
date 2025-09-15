@@ -1,4 +1,4 @@
-package com.example.java_projectv2.repository;
+package com.example.java_projectv2.repository.department;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import jakarta.persistence.EntityManager;
@@ -14,9 +14,9 @@ public class DepartmentRepositoryImpl implements CustomDepartmentRepository
     private EntityManager em;
 
     @Override
-    public List<EmployeeDto> findAllEmployeesByDeparmentId(Long id) {
+    public List<EmployeeDto> findAllEmployeesByDepartmentId(Long id) {
         return em.createQuery(
-                        "SELECT new com.example.java_projectv2.dto.employee.EmployeeDto(e.id, e.name, e.position,e.salary) " +
+                        "SELECT new com.example.java_projectv2.dto.employee.EmployeeDto(e.id, e.name, e.position,e.salary,e.finCode) " +
                                 "FROM EmployeeEntity e " +
                                 "WHERE e.department.id = :deptId", EmployeeDto.class)
                 .setParameter("deptId", id)

@@ -1,15 +1,11 @@
 package com.example.java_projectv2.rules;
 
-import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.entity.EmployeeEntity;
 import com.example.java_projectv2.exception.BusinessException;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
-import com.example.java_projectv2.repository.EmployeeRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.example.java_projectv2.repository.employee.EmployeeRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @Service
 public class EmployeeRules extends BaseRules<EmployeeEntity>

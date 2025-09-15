@@ -1,4 +1,4 @@
-package com.example.java_projectv2.aop.helper;
+package com.example.java_projectv2.dto.log;
 
 public enum LogLevel
 {

@@ -1,7 +1,5 @@
-package com.example.java_projectv2.repository;
+package com.example.java_projectv2.repository.base;
 
-import com.example.java_projectv2.repository.base.IReadRepository;
-import com.example.java_projectv2.repository.base.IWriteRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

@@ -1,8 +1,9 @@
     package com.example.java_projectv2.exception;
 
-    import com.example.java_projectv2.aop.helper.Log;
-    import com.example.java_projectv2.aop.helper.LogDto;
-    import com.example.java_projectv2.aop.helper.LogLevel;
+    import com.example.java_projectv2.dto.log.LogDto;
+    import com.example.java_projectv2.helper.LogHelper;
+    import com.example.java_projectv2.service.log.LogClient;
+    import com.example.java_projectv2.dto.log.LogLevel;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,10 +18,10 @@
     @ControllerAdvice
     public class GlobalExceptionHandler
     {
-        private final Log log;
+        private final LogHelper logHelper;
 
-        public GlobalExceptionHandler(Log log) {
-            this.log = log;
+        public GlobalExceptionHandler(LogHelper logHelper) {
+            this.logHelper = logHelper;
         }
 
         @ExceptionHandler(value = ResourceNotFoundException.class)
@@ -28,7 +29,7 @@
                 (ResourceNotFoundException ex, WebRequest request)
         {
             Map<String,Object> map = buildResponse(ex, request);
-            logMethod(LogLevel.WARNING, ex.getMessage());
+            logHelper.logMethod(LogLevel.WARNING, ex.getMessage());
             return  new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
         }
 
@@ -37,7 +38,7 @@
                 (NotNullException ex, WebRequest request)
         {
             Map<String,Object> map = buildResponse(ex, request);
-            logMethod(LogLevel.WARNING, ex.getMessage());
+            logHelper.logMethod(LogLevel.WARNING, ex.getMessage());
             return  new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
 
@@ -46,7 +47,7 @@
                 (DuplicateResourceException ex, WebRequest request)
         {
             Map<String,Object> map =  buildResponse(ex,request);
-            logMethod(LogLevel.WARNING, ex.getMessage());
+            logHelper.logMethod(LogLevel.WARNING, ex.getMessage());
             return  new ResponseEntity<>(map, HttpStatus.CONFLICT);
         }
 
@@ -55,8 +56,26 @@
                 (BusinessException ex, WebRequest request)
         {
             Map<String,Object> map =  buildResponse(ex,request);
-            logMethod(LogLevel.WARNING, ex.getMessage());
+            logHelper.logMethod(LogLevel.WARNING, ex.getMessage());
             return  new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(value = ValidationException.class)
+        public ResponseEntity<?> handleValidationException
+                (ValidationException ex, WebRequest request)
+        {
+            Map<String,Object> map = buildResponse(ex, request);
+            logHelper.logMethod(LogLevel.ERROR, ex.getMessage());
+
+            return  new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<?> handleAllExceptions(Exception ex, WebRequest request)
+        {
+            Map<String,Object> map = buildResponse(ex, request);
+            logHelper.logMethod(LogLevel.CRITICAL, ex.getMessage());
+            return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -78,29 +97,9 @@
             map.put("message", "Validation failed");
             map.put("errors", errors);
 
-            logMethod(LogLevel.WARNING, ex.getMessage());
+            logHelper.logMethod(LogLevel.WARNING, ex.getMessage());
             return new ResponseEntity<>(map, HttpStatus.UNPROCESSABLE_ENTITY);
         }
-
-        @ExceptionHandler(value = ValidationException.class)
-        public ResponseEntity<?> handleValidationException
-                (ValidationException ex, WebRequest request)
-        {
-            Map<String,Object> map = buildResponse(ex, request);
-            logMethod(LogLevel.ERROR, ex.getMessage());
-
-            return  new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
-        }
-
-        @ExceptionHandler(Exception.class)
-        public ResponseEntity<?> handleAllExceptions(Exception ex, WebRequest request)
-        {
-            Map<String,Object> map = buildResponse(ex, request);
-            logMethod(LogLevel.CRITICAL, ex.getMessage());
-            return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-
 
         private Map<String,Object> buildResponse(Exception ex,WebRequest request)
         {
@@ -110,10 +109,5 @@
             map.put("path", request.getDescription(false));
             return  map;
         }
-        private void logMethod(LogLevel level, String message) {
-            LogDto dto = new LogDto();
-            dto.setLevel(level);
-            dto.setMessage(message);
-            log.writeLogToLogServiceAsync(dto);
-        }
+
     }

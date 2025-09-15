@@ -6,9 +6,10 @@ DbConfig,JwtConfig,EmailConfig,LoggingConfig
 MiddleWare Folder
 Api Key Add
 
-Aspect-Oriented Programming(AOP)
+Aspect-Oriented Programming(AOP) ----Success
 {
-    Connect 2 services
+    Connect 2 services ----Success
+
     add Rabbit for LogService
     Add Login Register and added log more detailed
 }

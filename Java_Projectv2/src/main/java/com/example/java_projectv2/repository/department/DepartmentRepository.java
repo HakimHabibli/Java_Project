@@ -1,7 +1,7 @@
-package com.example.java_projectv2.repository;
+package com.example.java_projectv2.repository.department;
 
 import com.example.java_projectv2.entity.DepartmentEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.java_projectv2.repository.base.IGenericRepository;
 
 public interface DepartmentRepository
         extends IGenericRepository<DepartmentEntity,Long>,CustomDepartmentRepository

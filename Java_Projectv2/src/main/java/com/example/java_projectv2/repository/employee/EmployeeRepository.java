@@ -1,6 +1,7 @@
-package com.example.java_projectv2.repository;
+package com.example.java_projectv2.repository.employee;
 
 import com.example.java_projectv2.entity.EmployeeEntity;
+import com.example.java_projectv2.repository.base.IGenericRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

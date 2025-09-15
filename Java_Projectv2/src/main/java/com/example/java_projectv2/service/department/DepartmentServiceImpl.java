@@ -1,4 +1,4 @@
-package com.example.java_projectv2.service;
+package com.example.java_projectv2.service.department;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.department.DepartmentCreateDto;
@@ -8,8 +8,7 @@ import com.example.java_projectv2.dto.department.DepartmentUpdateDto;
 import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
 import com.example.java_projectv2.mapper.DepartmentMapper;
-import com.example.java_projectv2.repository.DepartmentRepository;
-import com.example.java_projectv2.repository.EmployeeRepository;
+import com.example.java_projectv2.repository.department.DepartmentRepository;
 import com.example.java_projectv2.rules.DepartmentRules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,7 +76,7 @@ public class DepartmentServiceImpl implements DepartmentService
 
     @Override
     public List<EmployeeDto> findAllEmployeesByDepartmentId(Long id) {
-        return departmentRepository.findAllEmployeesByDeparmentId(id);
+        return departmentRepository.findAllEmployeesByDepartmentId(id);
     }
 
 }

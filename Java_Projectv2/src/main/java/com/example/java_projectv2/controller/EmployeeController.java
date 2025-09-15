@@ -2,7 +2,7 @@ package com.example.java_projectv2.controller;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
-import com.example.java_projectv2.service.EmployeeService;
+import com.example.java_projectv2.service.employee.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;

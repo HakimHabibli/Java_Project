@@ -4,7 +4,7 @@ import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.exception.BusinessException;
 import com.example.java_projectv2.exception.NotNullException;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
-import com.example.java_projectv2.repository.DepartmentRepository;
+import com.example.java_projectv2.repository.department.DepartmentRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 

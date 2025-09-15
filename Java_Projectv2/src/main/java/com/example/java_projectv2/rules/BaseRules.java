@@ -12,7 +12,9 @@ public abstract class BaseRules<S>
     protected final JpaRepository<S,Long> repository;
 //    protected istifade edilmesi inheritance alacaq olan classlar uzerinde isledile bilsin deye
 
-    protected BaseRules(JpaRepository<S, Long> repository) {
+    protected BaseRules
+            (JpaRepository<S, Long> repository)
+    {
         this.repository = repository;
     }
 
@@ -27,6 +29,5 @@ public abstract class BaseRules<S>
     }
 
     public void checkIfUnique(S obj)
-    {
-    }
+    { }
 }
