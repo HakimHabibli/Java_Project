@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
 {
     @Override
-    public EmployeeDto apply(EmployeeEntity employee) {
+    public EmployeeDto apply(EmployeeEntity employee)
+    {
         return new EmployeeDto
                 (
                         employee.getId(),
@@ -24,7 +25,8 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
                         employee.getFinCode()
                 );
     }
-    public EmployeeCreateDto toEmployeeCreateDto(EmployeeEntity employee) {
+    public EmployeeCreateDto toEmployeeCreateDto(EmployeeEntity employee)
+    {
         return new EmployeeCreateDto(
                 employee.getId(),employee.getName(),employee.getPosition(),employee.getSalary(),employee.getDepartment().getId(),employee.getFinCode());
     }
@@ -44,7 +46,8 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
         entity.setFinCode(dto.finCode());
         return entity;
     }
-    public EmployeeEntity toEntity(EmployeeCreateDto dto) {
+    public EmployeeEntity toEntity(EmployeeCreateDto dto)
+    {
         EmployeeEntity entity = new EmployeeEntity();
         entity.setName(dto.name());
         entity.setPosition(dto.position());

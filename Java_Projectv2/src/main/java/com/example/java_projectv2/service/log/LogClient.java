@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 @Component
 public class LogClient
 {
-//    private RestTemplate restTemplate = new RestTemplate();
+    //private RestTemplate restTemplate = new RestTemplate();
     private final WebClient webClient ;
 
     public LogClient(WebClient.Builder builder)
@@ -22,21 +22,22 @@ public class LogClient
 
     public void writeLogToLogServiceAsync(LogDto dto)
     {
-//        restTemplate.postForObject("http://localhost:8081/logs/create", dto, String.class);
+        //restTemplate.postForObject("http://localhost:8081/logs/create", dto, String.class);
 
-            webClient.post()
-                .uri("/create")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(dto)
-                .retrieve()
-                    .toBodilessEntity()
-                .subscribe();
+        webClient.post()
+                 .uri("/create")
+                 .contentType(MediaType.APPLICATION_JSON)
+                 .bodyValue(dto)
+                 .retrieve()
+                     .toBodilessEntity()
+                 .subscribe();
 
 
         System.out.println(dto);
     }
 
-    public void writeLogToFile(String message) {
+    public void writeLogToFile(String message)
+    {
         String filePath = "C:\\Users\\ADMIN\\OneDrive\\Desktop\\Log.txt";
         try (FileWriter fw = new FileWriter(filePath, true);
              PrintWriter pw = new PrintWriter(fw)) {

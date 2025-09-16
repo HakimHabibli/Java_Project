@@ -6,6 +6,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,9 +14,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String LOG_QUEUE = "logQueue";
-    public static final String LOG_EXCHANGE = "logExchange";
-    public static final String LOG_ROUTING_KEY = "logRoutingKey";
+    //TODO : GOTO YAML +++
+    @Value("${my.constant.LOG_QUEUE}")
+    public String LOG_QUEUE ;
+    @Value("${my.constant.LOG_EXCHANGE}")
+    public String LOG_EXCHANGE ;
+    @Value("${my.constant.LOG_ROUTING_KEY}")
+    public String LOG_ROUTING_KEY ;
 
     @Bean
     public Queue logQueue() {
@@ -24,7 +29,7 @@ public class RabbitMQConfig {
 
     @Bean
     public DirectExchange logExchange() {
-        return new DirectExchange(LOG_EXCHANGE);
+        return new DirectExchange(LOG_EXCHANGE  );
     }
 
     @Bean

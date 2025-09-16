@@ -10,14 +10,13 @@ Aspect-Oriented Programming(AOP) ----Success
 {
     Connect 2 services ----Success
 
-    add Rabbit for LogService
+    add Rabbit for LogService ----Success
     Add Login Register and added log more detailed
 }
 Add UploadSalary Service For Transaction Management 
 
-Pagination Add--Spring Data ilə Pageable
+Pagination Add--Spring Data ilə Pageable --Convert JpaSpecificationExecutor interface
 
-Security--JwtConfig
 
 UnitOfWork
 ----

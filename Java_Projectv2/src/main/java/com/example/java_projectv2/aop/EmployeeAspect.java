@@ -2,6 +2,7 @@ package com.example.java_projectv2.aop;
 
 
 import com.example.java_projectv2.dto.log.LogDto;
+import com.example.java_projectv2.producer.LogProducer;
 import com.example.java_projectv2.service.log.LogClient;
 import com.example.java_projectv2.dto.log.LogLevel;
 import org.aspectj.lang.JoinPoint;
@@ -16,10 +17,13 @@ import org.springframework.stereotype.Component;
 public class EmployeeAspect
 {
     private final LogClient log;
+    private final LogProducer producer;
 
-    public EmployeeAspect(LogClient log) {
+    public EmployeeAspect(LogClient log, LogProducer producer) {
         this.log = log;
+        this.producer = producer;
     }
+
     @Pointcut("execution(* com.example.java_projectv2.service.employee.EmployeeService.*(..))")
     public void employeeMethods(){
     }
@@ -32,7 +36,7 @@ public class EmployeeAspect
         LogDto dto = new LogDto();
         dto.setMessage("Employee methods before execution");
         dto.setLevel(LogLevel.INFO);
-        log.writeLogToLogServiceAsync(dto);
+        producer.sendLog(dto);
     }
 
 
@@ -46,6 +50,6 @@ public class EmployeeAspect
                 setLevel(LogLevel.INFO);
             }
         };
-        log.writeLogToLogServiceAsync(dto);
+        producer.sendLog(dto);
     }
 }

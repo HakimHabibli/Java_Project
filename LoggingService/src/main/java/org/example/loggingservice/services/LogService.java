@@ -14,6 +14,7 @@ import java.util.List;
 public class LogService {
     private final LogRepository logRepository;
     private   final LogMapper logMapper;
+
     public LogService(LogRepository logRepository, LogMapper logMapper) {
         this.logRepository = logRepository;
         this.logMapper = logMapper;

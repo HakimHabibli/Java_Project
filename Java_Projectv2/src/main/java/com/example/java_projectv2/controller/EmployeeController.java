@@ -2,6 +2,7 @@ package com.example.java_projectv2.controller;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
+import com.example.java_projectv2.entity.EmployeeEntity;
 import com.example.java_projectv2.service.employee.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,12 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
         return ResponseEntity.ok(employeeService.getAllEmployees());
+    }
+
+    @GetMapping("/departmentName")
+    public ResponseEntity<List<EmployeeDto>> getAllEmployeesWithSpecification(@RequestParam String departmentName)
+    {
+        return ResponseEntity.ok(employeeService.getFilteredEmployees(departmentName));
     }
 
     @GetMapping("/{id}")

@@ -45,7 +45,7 @@ public class DepartmentAspect
         LogDto dto = new LogDto();
         dto.setMessage("Department methods before execution" );
         dto.setLevel(LogLevel.INFO);
-        _log.writeLogToLogServiceAsync(dto);
+        _logProducer.sendLog(dto);
     }
 
 }

@@ -3,19 +3,21 @@ package com.example.java_projectv2.helper;
 
 import com.example.java_projectv2.dto.log.LogDto;
 import com.example.java_projectv2.dto.log.LogLevel;
+import com.example.java_projectv2.producer.LogProducer;
 import com.example.java_projectv2.service.log.LogClient;
 import org.springframework.stereotype.Component;
 
 
 
 @Component
-
 public  class LogHelper
 {
     private final LogClient client;
+    private final LogProducer producer;
 
-    public LogHelper(LogClient client) {
+    public LogHelper(LogClient client, LogProducer producer) {
         this.client = client;
+        this.producer = producer;
     }
 
     /**
@@ -29,6 +31,7 @@ public  class LogHelper
         LogDto dto = new LogDto();
         dto.setLevel(level);
         dto.setMessage(message);
-        client.writeLogToLogServiceAsync(dto);
+        producer.sendLog(dto);
     }
+
 }

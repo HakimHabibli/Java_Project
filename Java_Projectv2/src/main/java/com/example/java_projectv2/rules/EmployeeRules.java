@@ -20,18 +20,20 @@ public class EmployeeRules extends BaseRules<EmployeeEntity>
     @Override
     public void checkIfExistsById(Long id)
     {
-        if(!repository.existsById(id)){throw new ResourceNotFoundException("Employee with id " + id + " does not exist");}
+        if(!repository.existsById(id))
+        {
+            throw new ResourceNotFoundException("Employee with id " + id + " does not exist");
+        }
     }
 
     @Override
-    public void checkIfUnique(EmployeeEntity obj) {
+    public void checkIfUnique(EmployeeEntity obj)
+    {
         if(employeeRepository.existsByFinCode(obj.getFinCode()))
         {
             throw new BusinessException("Employee with Fin Code " + obj.getFinCode() + " already exists");
         }
     }
-
-
 
 }
 

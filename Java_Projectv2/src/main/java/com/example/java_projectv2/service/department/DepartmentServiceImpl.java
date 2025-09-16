@@ -61,8 +61,11 @@ public class DepartmentServiceImpl implements DepartmentService
     public DepartmentUpdateDto updateDepartment(DepartmentUpdateDto departmentUpdateDto) {
         var entity = departmentMapper.toDepartmentUpdateEntity(departmentUpdateDto);
 
+        //Business check
         departmentRules.checkNotNull(entity);
         departmentRules.checkIfUnique(entity);
+
+
         departmentRepository.save(entity);
 
         return departmentMapper.toDepartmentUpdateDto(entity);
