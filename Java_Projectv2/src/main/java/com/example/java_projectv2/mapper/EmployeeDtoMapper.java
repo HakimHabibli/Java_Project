@@ -30,11 +30,13 @@ public class EmployeeDtoMapper implements Function<EmployeeEntity, EmployeeDto>
         return new EmployeeCreateDto(
                 employee.getId(),employee.getName(),employee.getPosition(),employee.getSalary(),employee.getDepartment().getId(),employee.getFinCode());
     }
+
     public List<EmployeeDto> toEntityList(List<EmployeeEntity> employees)
     {
         return employees.stream()
                 .map(this::apply).collect(Collectors.toList());
     }
+
     public EmployeeEntity toEntity(EmployeeDto dto)
     {
         EmployeeEntity entity = new EmployeeEntity();

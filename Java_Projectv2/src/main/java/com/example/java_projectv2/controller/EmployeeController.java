@@ -2,6 +2,7 @@ package com.example.java_projectv2.controller;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
+import com.example.java_projectv2.dto.employee.GetEmployeeSpecificationDto;
 import com.example.java_projectv2.entity.EmployeeEntity;
 import com.example.java_projectv2.service.employee.EmployeeService;
 import jakarta.validation.Valid;
@@ -29,13 +30,25 @@ public class EmployeeController {
     @GetMapping("/departmentName")
     public ResponseEntity<List<EmployeeDto>> getAllEmployeesWithSpecification(@RequestParam String departmentName)
     {
-        return ResponseEntity.ok(employeeService.getFilteredEmployees(departmentName));
+        return ResponseEntity.ok(employeeService.getEmployeesWithDepartmentName(departmentName));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> getEmployee(@PathVariable Long id)
     {
        return ResponseEntity.ok(employeeService.getEmployeeById(id));
+    }
+
+    @GetMapping("/testForException")
+    public void testForException()
+    {
+        throw new RuntimeException();
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<EmployeeDto>> getAllEmployeesWithSpecification(@RequestBody GetEmployeeSpecificationDto dto)
+    {
+        return ResponseEntity.ok(employeeService.getEmployeesWithFilers(dto));
     }
 
     @PostMapping

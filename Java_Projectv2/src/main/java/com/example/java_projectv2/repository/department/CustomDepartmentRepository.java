@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CustomDepartmentRepository
 {
-    public List<EmployeeDto> findAllEmployeesByDepartmentId(Long id);
+    List<EmployeeDto> findAllEmployeesByDepartmentId(Long id);
 
 }

@@ -6,20 +6,27 @@ DbConfig,JwtConfig,EmailConfig,LoggingConfig
 MiddleWare Folder
 Api Key Add
 
+
+Add Login Register and added log more detailed
+Add UploadSalary Service For Transaction Management
+
+Pagination Add--Spring Data ilə Pageable --Convert JpaSpecificationExecutor interface++
+
+Rabbit Exchange to Kafka
+Learn Gradle not a Maven(Because old)
+UnitOfWork
+
+
+
+
+
+----
 Aspect-Oriented Programming(AOP) ----Success
 {
     Connect 2 services ----Success
 
     add Rabbit for LogService ----Success
-    Add Login Register and added log more detailed
 }
-Add UploadSalary Service For Transaction Management 
-
-Pagination Add--Spring Data ilə Pageable --Convert JpaSpecificationExecutor interface
-
-
-UnitOfWork
-----
 Logging Add----Success
 MapStruct----Success
 Custom Query (JPA Criteria API və ya Specification pattern ilə)----Success

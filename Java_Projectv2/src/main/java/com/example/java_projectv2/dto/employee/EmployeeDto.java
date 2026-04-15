@@ -3,9 +3,8 @@ package com.example.java_projectv2.dto.employee;
 
 import jakarta.validation.constraints.*;
 
-public record EmployeeDto(
-
-
+public record EmployeeDto
+        (
         Long id,
 
         @NotBlank(message = "Name cannot be blank")
@@ -17,7 +16,8 @@ public record EmployeeDto(
         String position,
 
         @Min(value = 0, message = "Salary must be positive")
-        double salary,
+        Double salary,
 
         String finCode
-) { }
+)
+{ }

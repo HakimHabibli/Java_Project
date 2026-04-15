@@ -1,0 +1,14 @@
+Logging Service
+Java_Projectv2
+TransactionService
+{
+Service-in əsasə öhdəliyi
+Employee və yaxud departmentdən salary çəkib onları transaksiya vasitəsi ilə hesablara yüklənməsi
+Log Service üçün OpenFeign istifadə sonra kafka istifadə
+AOP yazilmalıdı
+Rule yazilmalıdı
+}
+
+
+
+

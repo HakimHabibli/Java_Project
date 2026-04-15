@@ -1,4 +1,7 @@
+
+
 package com.example.java_projectv2.exception;
+
 
 public class BusinessException extends RuntimeException
 {

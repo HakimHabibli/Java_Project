@@ -1,16 +1,15 @@
 package com.example.java_projectv2.service.department;
 
+import com.example.java_projectv2.dto.department.*;
 import com.example.java_projectv2.dto.employee.EmployeeDto;
-import com.example.java_projectv2.dto.department.DepartmentCreateDto;
-import com.example.java_projectv2.dto.department.DepartmentDeleteDto;
-import com.example.java_projectv2.dto.department.DepartmentGetDto;
-import com.example.java_projectv2.dto.department.DepartmentUpdateDto;
 import com.example.java_projectv2.entity.DepartmentEntity;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
 import com.example.java_projectv2.mapper.DepartmentMapper;
 import com.example.java_projectv2.repository.department.DepartmentRepository;
+import com.example.java_projectv2.repository.specification.DepartmentSpecification;
 import com.example.java_projectv2.rules.DepartmentRules;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,25 +20,31 @@ public class DepartmentServiceImpl implements DepartmentService
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapper departmentMapper;
     private final DepartmentRules departmentRules;
+    private final DepartmentSpecification departmentSpecification;
 
     @Autowired
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper, DepartmentRules departmentRules)
-    {
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper, DepartmentRules departmentRules, DepartmentSpecification departmentSpecification) {
         this.departmentRepository = departmentRepository;
         this.departmentMapper = departmentMapper;
         this.departmentRules = departmentRules;
+        this.departmentSpecification = departmentSpecification;
     }
 
     @Override
-    public List<DepartmentGetDto> getAllDepartments()
-    {
+    public List<DepartmentGetFilterDto> getDepartmentsByfilter(DepartmentGetFilterDto dto) {
+        Specification<DepartmentEntity> entitySpec = departmentSpecification.DepartmentSpecification(dto);
+        var entities = departmentRepository.findAll(entitySpec);
+        return departmentMapper.toDepartmentGetFilterDtoList(entities);
+    }
+
+    @Override
+    public List<DepartmentGetDto> getAllDepartments() {
         var entity =  departmentRepository.findAll();
         return departmentMapper.toGetDepartmentDtoList(entity);
     }
 
     @Override
-    public DepartmentGetDto getDepartmentById(Long id)
-    {
+    public DepartmentGetDto getDepartmentById(Long id) {
         DepartmentEntity entity = departmentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Department not found"));
         return departmentMapper.toGetDepartmentDto(entity);
     }
@@ -72,8 +77,7 @@ public class DepartmentServiceImpl implements DepartmentService
     }
 
     @Override
-    public void deleteDepartmentById(DepartmentDeleteDto departmentDeleteDto)
-    {
+    public void deleteDepartmentById(DepartmentDeleteDto departmentDeleteDto) {
         departmentRepository.deleteById(departmentDeleteDto.getId());
     }
 

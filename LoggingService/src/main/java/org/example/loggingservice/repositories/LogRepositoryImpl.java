@@ -9,7 +9,6 @@ import java.util.List;
 @RestController
 public class LogRepositoryImpl implements LogRepositoryCustom
 {
-
     @Override
     public List<Log> findLogsWithCustomFilter(String filter)
     {

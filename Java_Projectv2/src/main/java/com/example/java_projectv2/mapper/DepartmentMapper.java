@@ -21,6 +21,9 @@ public interface DepartmentMapper
     DepartmentEntity toDepartmentUpdateEntity(DepartmentUpdateDto updateDto);
     DepartmentUpdateDto toDepartmentUpdateDto(DepartmentEntity department);
 
+    DepartmentGetFilterDto toDepartmentGetFilterDto(DepartmentEntity department);
+    List<DepartmentGetFilterDto> toDepartmentGetFilterDtoList(List<DepartmentEntity> departments);
+
     DepartmentWithEmployeesDto toDepartmentWithEmployeesDto(DepartmentEntity department);
 //    EmployeeDto toEmployeeDto(EmployeeEntity employee);
 //    List<EmployeeDto> toEmployeeDtoList(List<EmployeeEntity> employees);

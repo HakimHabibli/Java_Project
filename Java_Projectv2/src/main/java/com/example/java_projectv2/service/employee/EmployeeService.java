@@ -2,12 +2,16 @@ package com.example.java_projectv2.service.employee;
 
 import com.example.java_projectv2.dto.employee.EmployeeDto;
 import com.example.java_projectv2.dto.employee.EmployeeCreateDto;
+import com.example.java_projectv2.dto.employee.GetEmployeeSpecificationDto;
 import com.example.java_projectv2.entity.EmployeeEntity;
 import com.example.java_projectv2.exception.ResourceNotFoundException;
 import com.example.java_projectv2.mapper.EmployeeDtoMapper;
 import com.example.java_projectv2.repository.employee.EmployeeRepository;
 import com.example.java_projectv2.repository.specification.EmployeeSpecification;
 import com.example.java_projectv2.rules.EmployeeRules;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -29,14 +33,32 @@ public class EmployeeService
         _employeeSpecification = employeeSpecification;
     }
 
-    public List<EmployeeDto>  getFilteredEmployees(String departmentName) {
 
+    public List<EmployeeDto> getEmployeesWithFilers(GetEmployeeSpecificationDto dto)
+    {
+        Specification<EmployeeEntity> employeeSpec = _employeeSpecification.getEmployeeSpecification(dto);
+        List<EmployeeEntity> employees = _employeeRepository.findAll(employeeSpec);
+
+        return _employeeDtoMapper.toEntityList(employees);
+    }
+
+    public List<EmployeeDto> getEmployeesWithDepartmentName(String departmentName)
+    {
         Specification<EmployeeEntity> departmentSpec = _employeeSpecification.hasDepartment(departmentName);
 
         List<EmployeeEntity> employees = _employeeRepository.findAll(departmentSpec);
 
         return _employeeDtoMapper.toEntityList(employees);
     }
+
+    public List<EmployeeDto> getAllEmployeeWithPageable(Pageable pageable)
+    {
+        var configPageable = pageable;
+        configPageable = PageRequest.of(3,20, Sort.by("name").descending());
+        return _employeeRepository.findAll(configPageable)
+                .stream().map(_employeeDtoMapper).collect(Collectors.toList());
+    }
+
     public List<EmployeeDto> getAllEmployees()
     {
         return _employeeRepository.findAll()

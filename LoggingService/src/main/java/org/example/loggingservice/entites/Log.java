@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Log {
-
     @Id
     private String id;
 
@@ -19,13 +18,15 @@ public class Log {
     private LocalDateTime timestamp;
 
 
-    public Log() {
+    public Log()
+    {
         this.timestamp = LocalDateTime.now();
     }
+
     public Log(LogLevel level, String message)
     {
-     this.level = level;
-     this.message = message;
-     this.timestamp = LocalDateTime.now();
+        this();
+        this.level = level;
+        this.message = message;
     }
 }

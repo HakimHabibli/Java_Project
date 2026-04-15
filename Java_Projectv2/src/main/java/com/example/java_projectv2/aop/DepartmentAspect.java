@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 public class DepartmentAspect
 {
     private final LogClient _log;
-
     private final LogProducer _logProducer;
 
     public DepartmentAspect(LogClient log, LogProducer logProducer) {

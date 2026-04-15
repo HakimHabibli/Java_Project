@@ -5,6 +5,6 @@ import java.util.Optional;
 
 public interface IReadRepository<T,ID>
 {
-    Optional<T> findById(ID id);
+     Optional<T> findById(ID id);
     List<T> findAll();
 }

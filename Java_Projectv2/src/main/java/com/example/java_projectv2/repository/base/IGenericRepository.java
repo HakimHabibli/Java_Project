@@ -5,12 +5,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public  interface IGenericRepository<T,ID>
-        extends JpaRepository<T,ID>
-        , IWriteRepository<T,ID>
-        , IReadRepository<T,ID>
-        , JpaSpecificationExecutor<T>
-{
+public interface IGenericRepository<T, ID>
+        extends JpaRepository<T, ID>
+        , IWriteRepository<T, ID>
+        , IReadRepository<T, ID>
+        , JpaSpecificationExecutor<T> {
 
 
 }
